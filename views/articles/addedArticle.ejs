@@ -10,20 +10,18 @@
       crossorigin="anonymous"
     />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-
     <title>Blog</title>
   </head>
   <body>
     <div class="container">
-      <header><%- include('../partials/header'); %></header>
-      <br /><br />
       <h1 class="mb-1"><%= article.title %></h1>
       <div class="text-muted mb-2">
         <%= article.createdAt.toLocaleDateString() %>
       </div>
+      <a href="/blog" class="btn btn-secondary">All Articles</a>
+      <a href="/articles/edit/<%= article.id %>" class="btn btn-info">Edit</a>
+
       <div><%- article.sanitizedHtml %></div>
-      <br /><br />
-      <a href="/" class="btn btn-secondary">Back To All Articles</a>
     </div>
   </body>
 </html>

@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-      crossorigin="anonymous"
-    />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Vaire</title>
+    <%- include('../partials/head'); %>
   </head>
-  <body>
+  <body class="container">
+    <header><%- include('../partials/header'); %></header>
+
+    <main>
+      <div class="jumbotron">
+        <h1>Blog Articles</h1>
+      </div>
+    </main>
+
     <div class="container">
-      <h1 class="mb-4">Blog Articles</h1>
       <a href="/articles/new" class="btn btn-success">New Article</a>
 
       <% articles.forEach(article => { %>
@@ -24,10 +22,12 @@
           <div class="card-subtitle text-muted mb-2">
             <%= article.createdAt.toLocaleDateString() %>
           </div>
+          <br />
+          <div class="card-subtitle h6 mb-2">Lühike kirjeldus:</div>
           <div class="card-text mb-2"><%= article.description %></div>
-          <a href="articles/<%= article.slug %>" class="btn btn-primary"
-            >Read More</a
-          >
+          <br />
+          <div class="card-subtitle h6 mb-2">Pikk kirjeldus:</div>
+          <div class="card-text mb-2"><%= article.markdown %></div>
           <a href="articles/edit/<%= article.id %>" class="btn btn-info"
             >Edit</a
           >
@@ -42,5 +42,7 @@
       </div>
       <% }) %>
     </div>
+
+    <footer><%- include('../partials/footer'); %></footer>
   </body>
 </html>

@@ -40,7 +40,7 @@ router.put(
 
 router.delete("/:id", async (req, res) => {
   await Article.findByIdAndDelete(req.params.id);
-  res.redirect("/");
+  res.redirect("/blog");
 });
 
 function saveArticleAndRedirect(path) {
@@ -51,7 +51,7 @@ function saveArticleAndRedirect(path) {
     article.markdown = req.body.markdown;
     try {
       article = await article.save();
-      res.redirect(`/articles/${article.slug}`);
+      res.redirect("/blog");
     } catch (e) {
       res.render(`articles/${path}`, { article: article });
     }
