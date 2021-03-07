@@ -11,9 +11,7 @@ const { auth } = require("./src/middlewares/auth");
 
 app.set("view engine", "ejs");
 app.use(express.urlencoded({ extended: false }));
-// parse application/x-www-form-urlencoded
 app.use(bodyparser.urlencoded({ extended: false }));
-// parse application/json
 app.use(bodyparser.json());
 app.use(cookieParser());
 app.use(methodOverride("_method"));
@@ -32,6 +30,12 @@ app.get("/blog", async (req, res) => {
 
 app.get("/about", function (req, res) {
   res.render("pages/about");
+});
+app.get("/register", function (req, res) {
+  res.render("users/index");
+});
+app.get("/login", function (req, res) {
+  res.render("users/login");
 });
 
 app.get("/start", function (req, res) {
@@ -120,5 +124,5 @@ app.get("/api/logout", auth, function (req, res) {
   });
 });
 
-// listening port
+//  port
 app.listen(5000);

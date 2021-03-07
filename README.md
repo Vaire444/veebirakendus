@@ -49,3 +49,37 @@ Kui on sisselogitud kasutajaid, kuvab tulemust nagu all näha
 ```
 
 ### Väljalogimine
+
+localhost:5000/api/logout
+
+## Page rights
+
+ADMIN user
+
+```
+{
+
+    "accessType": "ADMIN",
+    "firstname": "Suvi",
+    "lastname":"Päike",
+    "email":"suvi123@vikk.ee",
+    "password": "87654321",
+     "password2": "87654321"
+    }
+```
+
+NOT_ADMIN(default) user
+
+```
+   {
+    "firstname": "Lepa",
+    "lastname":"Puravik",
+    "email":"lepp@vikk.ee",
+    "password": "87654321",
+    "password2": "87654321"
+    }
+```
+
+https://medium.com/@sarthakmittal1461/to-build-login-sign-up-and-logout-restful-apis-with-node-js-using-jwt-authentication-f3d7287acca2
+
+localhost:5000/api/profile
