@@ -3,12 +3,9 @@ mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 mongoose.Promise = global.Promise;
 module.exports = {
-  Articles: require("./models/article"),
-
-  //   Products: require("./models/products.model"),
-  //   Orders: require("./models/orders.model"),
-  //   Bonus: require("./models/bonus.model"),
+  Articles: require("./src/models/article"),
 };
