@@ -5,10 +5,10 @@ const validator = require("validator");
 const salt = 10; // salt on kasutusel hashimisel
 
 const userSchema = mongoose.Schema({
-  accessType: {
+  role: {
     type: String,
-    enum: ["ADMIN", "NOT_ADMIN"],
-    default: "NOT_ADMIN",
+    enum: ["basic", "admin"],
+    default: "basic",
     required: true,
   },
   firstname: {
