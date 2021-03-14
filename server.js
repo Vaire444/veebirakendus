@@ -16,9 +16,13 @@ app.use(bodyparser.json());
 app.use(cookieParser());
 app.use(methodOverride("_method"));
 
-app.get("/", async (req, res) => {
+app.get("/", function (req, res) {
+  res.render("pages/index");
+});
+
+app.get("/main", async (req, res) => {
   const articles = await Article.find().sort({ createdAt: "desc" });
-  res.render("pages/index", { articles: articles });
+  res.render("pages/main", { articles: articles });
 });
 
 app.use("/articles", articleRouter);
@@ -28,8 +32,8 @@ app.get("/blog", async (req, res) => {
   res.render("pages/articles", { articles: articles });
 });
 
-app.get("/about", function (req, res) {
-  res.render("pages/about");
+app.get("/profile", function (req, res) {
+  res.render("pages/profile");
 });
 app.get("/register", function (req, res) {
   res.render("users/index");
@@ -43,16 +47,17 @@ app.get("/start", function (req, res) {
 });
 
 // uue kasutaja lisamine (sign-up route)
-app.post("/api/register", function (req, res) {
-  // kasutaja võtmine
+app.post("/register", function (req, res) {
   const newuser = new User(req.body);
 
   if (newuser.password != newuser.password2)
-    return res.status(400).json({ message: "password not match" });
+    return res.status(400).json({ message: "Salasõnad ei klapi" });
 
   User.findOne({ email: newuser.email }, function (err, user) {
     if (user)
-      return res.status(400).json({ auth: false, message: "email exits" });
+      return res
+        .status(400)
+        .json({ auth: false, message: "e-post on juba kasutusel" });
 
     newuser.save((err, doc) => {
       if (err) {
@@ -68,37 +73,33 @@ app.post("/api/register", function (req, res) {
 });
 
 // kasutaja sisselogimine
-app.post("/api/login", function (req, res) {
+app.post("/login", function (req, res) {
   let token = req.cookies.auth;
   User.findByToken(token, (err, user) => {
     if (err) return res(err);
     if (user)
       return res.status(400).json({
         error: true,
-        message: "You are already logged in",
+        message: "Sa oled juba sisse logitud",
       });
     else {
       User.findOne({ email: req.body.email }, function (err, user) {
         if (!user)
           return res.json({
             isAuth: false,
-            message: " Auth failed ,email not found",
+            message: " Autentimine ebaõnnestus, e-posti aadressi ei leia",
           });
 
         user.comparepassword(req.body.password, (err, isMatch) => {
           if (!isMatch)
             return res.json({
               isAuth: false,
-              message: "password doesn't match",
+              message: "Vale salasõna",
             });
 
           user.generateToken((err, user) => {
             if (err) return res.status(400).send(err);
-            res.cookie("auth", user.token).json({
-              isAuth: true,
-              id: user._id,
-              email: user.email,
-            });
+            res.redirect("/main");
           });
         });
       });
@@ -107,20 +108,20 @@ app.post("/api/login", function (req, res) {
 });
 
 // sisselogitud kasutaja saamine
-app.get("/api/profile", auth, function (req, res) {
+app.get("/profile", auth, function (req, res) {
   res.json({
     isAuth: true,
     id: req.user._id,
     email: req.user.email,
-    name: req.user.firstname + req.user.lastname,
+    name: req.user.firstname + " " + req.user.lastname,
   });
 });
 
 //kasutaja väljalogimine
-app.get("/api/logout", auth, function (req, res) {
+app.get("/logout", auth, function (req, res) {
   req.user.deleteToken(req.token, (err, user) => {
-    if (err) return res.status(400).send(err);
-    res.sendStatus(200);
+    if (err) return res.render("pages/index");
+    res.render("pages/index");
   });
 });
 

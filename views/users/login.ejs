@@ -14,11 +14,11 @@
     <title>Sisselogimine</title>
   </head>
   <div class="container">
-    <header><%- include('../partials/header'); %></header>
+    <header><%- include('../partials/headerLogin'); %></header>
     <body>
       <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
-          <form action="/api/login" method="post">
+          <form action="/login" method="post">
             <legend>Sisselogimine</legend>
             <div class="form-group">
               <label for="email">E-post</label>
@@ -45,9 +45,10 @@
                 Logi sisse
               </button>
             </div>
-            <a class="nav-link text-center" href="/register"
-              >Registreeri kasutajaks</a
-            >
+            <p class="text-center mt-2">
+              Ei ole veel kasutajaks registreerinud? Palun registreeri
+              <a href="/register">siin</a>!
+            </p>
           </form>
         </div>
       </div>

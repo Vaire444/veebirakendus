@@ -2,8 +2,6 @@ const express = require("express");
 const router = express.Router();
 const Article = require("../models/article");
 const db = require("../../db");
-//const article = db.Articles;
-//const router = express.Router();
 
 router.get("/new", (req, res) => {
   res.render("articles/new", { article: new Article() });

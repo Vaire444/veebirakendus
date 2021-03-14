@@ -8,6 +8,7 @@
 
 - express - võimaldab määratleda oma rakenduse marsruudid HTTP-meetodite ja URL-ide põhjal
 - mongoose - kasutatakse ühenduse loomiseks meie MongoDB andmebaasiga.
+- EJS on lihtne templiidikeel, mis võimaldab luua HTML-i märgistuse lihtsa JavaScripti abil.
 
 `npm i express mongoose ejs`
 
@@ -43,90 +44,26 @@ artikklite id-d aadressiribal ilusaks
 - bcrypt - kasutatakse paroolide räsimiseks ja võrdlemiseks
 - jsonwebtoken - JSON-i Web Tokens (JWT) on avatud standard, mis määratleb kompaktse ja iseseisva viisi, kuidas osapoolte vahel JSON-objektina turvaliselt teavet edastada
 
-`npm install body-parser cookie-parser bcrypt jsonwebtoken`
+`npm i body-parser cookie-parser bcrypt jsonwebtoken`
+`npm install express-sessions`
+`npm i --save connect-flash`
 
 # Server
 
-localhost:5000/api/profile
+Ühnduse loomine
+`npm run devStart`
 
-# POSTMAN
+Ühendus pordil:
+`localhost:5000`
 
-Postmanis tehtavad päringud
 
-## kasutaja registreerimine
+# GitHub
 
-POST `localhost:5000/API/register`
+`git add .`
 
-```
-{
-    "firstname": "Lepa",
-    "lastname":"Puravik",
-    "email":"lepp@vikk.ee",
-    "password": "87654321",
-     "password2": "87654321"
-    }
+`git commit -m <"kommentaar">`
 
-```
-
-## Kasutaja sisselogimine
-
-POST `localhost:5000/api/login`
-
-```
-{
-    "email":"lepp123@vikk.ee",
-    "password": "87654321"
-    }
-
-```
-
-## Sisselogitud kasutajate leidmine
-
-GET `localhost:5000/api/profile`
-
-Kui on sisselogitud kasutajaid, kuvab tulemust nagu all näha
-
-```
-{
-    "isAuth": true,
-    "id": "6044def612256a0d34811bcd",
-    "email": "lepp123@vikk.ee",
-    "name": "LepaPuravik"
-}
-
-```
-
-## Väljalogimine
-
-localhost:5000/api/logout
-
-## Page rights
-
-Roles: admin, basic
-
-```
-{
-
-    "role": "admin",
-    "firstname": "Suvi",
-    "lastname":"Päike",
-    "email":"suvi123@vikk.ee",
-    "password": "87654321",
-     "password2": "87654321"
-    }
-```
-
-NOT_ADMIN(default) user
-
-```
-   {
-    "firstname": "Lepa",
-    "lastname":"Puravik",
-    "email":"lepp@vikk.ee",
-    "password": "87654321",
-    "password2": "87654321"
-    }
-```
+`git push`
 
 # Kasutatud peamine materjal:
 

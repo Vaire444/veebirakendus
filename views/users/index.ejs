@@ -14,13 +14,13 @@
     <title>Registreerimine</title>
   </head>
   <div class="container">
-    <header><%- include('../partials/header'); %></header>
-    <body>
+    <header><%- include('../partials/headerLogin'); %></header>
+     <body>
       <div class="row">
         <div class="col-sm-4 col-sm-offset-4">
 
             
-          <form action="/api/register" method="post">
+          <form action="/register" method="post">
             <legend>Kasutaja registreerimine</legend>
             <div class="form-group">
               <label for="firstmame">Eesnimi</label>
@@ -75,7 +75,10 @@
             <div class="text-center">
               <button type="submit" class="btn btn-secondary">Loo kasutaja</button>
             </div>
-                       <a class="nav-link text-center" href="/login">Logi sisse</a>
+            <p class="text-center mt-2">
+             Oled juba kasutajaks registreerinud? Palun logi sisse
+              <a href="/login">siin</a>!
+            </p>
           </form>
          
         </div>
