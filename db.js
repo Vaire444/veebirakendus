@@ -3,9 +3,5 @@ mongoose.connect(process.env.MONGODB_URI, {
   useCreateIndex: true,
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useFindAndModify: false,
+  useFindAndModify: true,
 });
-mongoose.Promise = global.Promise;
-module.exports = {
-  Articles: require("./src/models/article"),
-};

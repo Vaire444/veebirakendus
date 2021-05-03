@@ -1,8 +1,9 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const validator = require("validator");
 const salt = 10; // salt on kasutusel hashimisel
+const confiq = require("../../db");
 
 const userSchema = mongoose.Schema({
   role: {
@@ -65,7 +66,7 @@ userSchema.pre("save", function (next) {
   }
 });
 
-// kasutaja parooli võrdlemiseks, kas salasõna on õige või mitte (dekodeerime meie salvestatud parooli)
+// kasutaja sisestatud parooli võrdlemiseks, kas salasõna on õige või mitte (dekodeerime meie salvestatud parooli)
 
 userSchema.methods.comparepassword = function (password, cb) {
   bcrypt.compare(password, this.password, function (err, isMatch) {
@@ -79,7 +80,6 @@ userSchema.methods.comparepassword = function (password, cb) {
 userSchema.methods.generateToken = function (cb) {
   var user = this;
   var token = jwt.sign(user._id.toHexString(), "secret");
-
   user.token = token;
   user.save(function (err, user) {
     if (err) return cb(err);
@@ -90,7 +90,6 @@ userSchema.methods.generateToken = function (cb) {
 // järgmine meetod on kindla tokeni leidmiseks (leia tokeni järgi)/ seda meetodit kasutatakse, et teada saada, kas kasutaja on sisse loginud või mitte
 userSchema.statics.findByToken = function (token, cb) {
   var user = this;
-
   jwt.verify(token, "secret", function (err, decode) {
     user.findOne({ _id: decode, token: token }, function (err, user) {
       if (err) return cb(err);
@@ -102,7 +101,6 @@ userSchema.statics.findByToken = function (token, cb) {
 // järgmine meetod kustutab tokeni
 userSchema.methods.deleteToken = function (token, cb) {
   var user = this;
-
   user.updateOne({ $unset: { token: 1 } }, function (err, user) {
     if (err) return cb(err);
     cb(null, user);
