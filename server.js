@@ -58,8 +58,9 @@ app.use(
   })
 );
 
-app.get("/", function (req, res) {
-  res.render("pages/index");
+app.get("/", auth, async (req, res) => {
+  const articles = await Article.find().sort({ createdAt: "desc" });
+  res.render("pages/main", { articles: articles });
 });
 
 app.get("/main", auth, async (req, res) => {
