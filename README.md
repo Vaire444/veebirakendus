@@ -4,7 +4,7 @@
 
 `npm init -y`
 
-## Sõltuvused(Dependencies)
+## Dependencies
 
 - express - võimaldab määratleda oma rakenduse marsruudid HTTP-meetodite ja URL-ide põhjal
 - mongoose - kasutatakse ühenduse loomiseks meie MongoDB andmebaasiga.
@@ -12,32 +12,32 @@
 
 `npm i express mongoose ejs`
 
-## Dev sõltuvused(dependencies)
+## Dev dependencies
 
 - nodemon - automaatselt taaskäivitab node rakenduse, kui mingid on tehtud mingeid muudatusi
 
 `npm i --save-dev nodemon`
 
-## Raamatukogu(Libraries) marked, slugify
+## Libraries marked, slugify
 
 artikklite id-d aadressiribal ilusaks
 
 `npm i marked slugify`
 
-## Moodul(Module) method-override
+## Module method-override
 
 - method-override - Võimaldab kasutada HTTP-verbe nagu PUT või DELETE kohtades, kus klient seda ei toeta.(kustutamise nupp)
 
 `npm i method-override`
 
-## Raamatukogu(Libraries) DOMPurify jsdom
+## Libraries DOMPurify jsdom
 
 - DOMPurify desinfitseerib HTML-i ja hoiab ära XSS-rünnakud
 - jsdom on paljude veebistandardite, eriti WHATWG DOM- ja HTML-standardite puhas JavaScripti rakendus, mis on mõeldud kasutamiseks Node.js-iga.
 
 `npm i domburify jsdom`
 
-## Kasutaja lisamiseks, autentimiseks lisame veel mõned sõltuvused (dependencies)
+## Kasutaja lisamiseks, autentimiseks dependencies
 
 - body-parser - kasutatakse HTTP post taotluste käsitlemiseks ja sissetuleva päringu voo kogu keha ekstraheerimiseks ning selle kuvamiseks req.body-le.
 - cookie-prser - kasutatakse küpsiste sõelumiseks
